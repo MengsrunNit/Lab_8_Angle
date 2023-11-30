@@ -11,10 +11,19 @@
 
 package geometry_objects.angle;
 
+
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import exceptions.FactException;
 import geometry_objects.Segment;
+import geometry_objects.delegates.LineDelegate;
+import geometry_objects.delegates.SegmentDelegate;
+import geometry_objects.delegates.intersections.IntersectionDelegate;
 import geometry_objects.points.Point;
 import utilities.math.MathUtilities;
+import utilities.math.analytic_geometry.GeometryUtilities;
 
 public class Angle implements Comparable<Angle>
 {
