@@ -12,15 +12,8 @@
 package geometry_objects.angle;
 
 
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 import exceptions.FactException;
 import geometry_objects.Segment;
-import geometry_objects.delegates.LineDelegate;
-import geometry_objects.delegates.SegmentDelegate;
-import geometry_objects.delegates.intersections.IntersectionDelegate;
 import geometry_objects.points.Point;
 import utilities.math.MathUtilities;
 import utilities.math.analytic_geometry.GeometryUtilities;
@@ -92,7 +85,7 @@ public class Angle implements Comparable<Angle>
 		double v2x = c.getX() - b.getX();
 		double v2y = c.getY() - b.getY();
 		double dotProd = v1x * v2x + v1y * v2y;
-		double cosAngle = dotProd / (Point.distance(a, b) * Point.distance(b, c));
+		double cosAngle = dotProd / (GeometryUtilities.distance(a, b) * GeometryUtilities.distance(b, c));
 
 		// Avoid minor calculation issues and retarget the given value to specific angles. 
 		// 0 or 180 degrees
@@ -182,6 +175,14 @@ public class Angle implements Comparable<Angle>
 	@Override
 	public boolean equals(Object obj)
 	{
-		// TODO
+		//IS IT AN ANGLE?
+		if (obj == null || !(obj instanceof Angle)) return false; 
+        Angle that = (Angle) obj;
+        
+        //Good job - is angle. Is the vertex the same? If so, its segments can be flip-flopped but they need to be the same
+		if (!this._vertex.equals(that._vertex))return false;
+		if (!(this._ray1.equals(that._ray1) || this._ray1.equals(that._ray2))) return false;
+		return (!(this._ray2.equals(that._ray1) || this._ray2.equals(that._ray2)));
+		
 	}
 }
