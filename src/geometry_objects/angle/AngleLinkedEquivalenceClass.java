@@ -29,69 +29,37 @@ import utilities.LinkedEquivalenceClass;
  */
 public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 {
-    // TODO
-	protected Angle _canonical;
-	protected Comparator<Angle> _comparator;
-	protected LinkedList<Angle> _body;
+    
 	
 	public AngleLinkedEquivalenceClass(AngleStructureComparator comparator) {
 		super(comparator); 
 	}
 	
-	@Override
-	public Angle canonical(){
-		return _canonical;
-	}
-	
-	@Override
-	public boolean isEmpty(){
-		return (_rest.isEmpty() && _canonical==null);
-	}
-	
-	@Override
-	public void clear() {
-		_canonical=null;
-		_rest.clear();
-	}
-	
-	@Override
-	public void clearNonCanonical() {
-		_rest.clear();
-	}
-	
-	@Override
-		public int size() {
-			return _rest.size();
-		}
-	
-	// TODO
 	@Override 
 	public boolean add(Angle element) {
 		if (isEmpty() || _canonical == null) {
-			this._canonical = element;
+			_canonical = element;
 			return true;
 		}
 		else if (belongs(element)) {
-			_body.addToFront(element);
+			if(_comparator.compare(_canonical, element) == -1) {
+				_rest.addToFront(_canonical);
+				_canonical = element;
+			}
+			else if(_comparator.compare(_canonical, element) ==1 || _comparator.compare(_canonical, element) ==0) {
+				_rest.addToFront(element);
+			}
+			
 			return true;
 		}
 		return false;
 	}
-	@Override 
-	public boolean remove(Angle target) {
-		return _rest.remove(target);
-	}
 	
-	@Override 
-	public boolean removeCanonical(){
-		_canonical=null;
-		return true;
-	}
 	@Override 
 	public boolean demoteAndSetCanonical(Angle element) {
 		if(belongs(element)) {
-			_canonical=element;
-			return true;
+			return add(element);
+			
 		}
 		_rest.clear();
 		_canonical=element;
@@ -101,7 +69,11 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	public String toString() {
 		return "" + _canonical.toString() + "|" + _rest.toString();
 	}
-	
+	public boolean belongs(Angle target) {
+		if (_comparator.compare(_canonical, target) == AngleStructureComparator.STRUCTURALLY_INCOMPARABLE) return false;
+		return true;
+		
+	}
 	
 	
 }
