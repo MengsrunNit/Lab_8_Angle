@@ -57,24 +57,31 @@ public class AngleStructureComparator implements Comparator<Angle>
 	 *              -1 for less than
 	 *              1 for greater than
 	 */
+	
+	
 	@Override
 	public int compare(Angle left, Angle right)
-	{
-        // when the left angle is not equal to the right anlge return Integer.MAX_VALUE;
-		if(left.compareTo(right)==0) {
-			return 0;
-		}
-		//the two angles are equivalence but left ray is bigger than the right ray
-		else if(left.compareTo(right)>0){  
-			return 1;
-		}
-		// the two angles are equivalence but the left ray is smaller than the right ray
-		else if(left.compareTo(right)<0) {
-			return -1;
+	{		
+		// check whether left and right are overlapped 
+		if(!left.overlays(right)) {
+			return STRUCTURALLY_INCOMPARABLE;
 		}
 		
-		return STRUCTURALLY_INCOMPARABLE;
-			
+		// check whether left bigger than right 
+		if(left.getRay1().HasSubSegment(right.getRay1()) && left.getRay2().HasSubSegment(right.getRay2())) return 1;
+		
+		if(left.getRay2().HasSubSegment(right.getRay1()) && left.getRay1().HasSubSegment(right.getRay2())) return 1; 
+		
+		if(right.getRay1().HasSubSegment(left.getRay1()) && right.getRay2().HasSubSegment(left.getRay2())) return -1;
+		
+		if(right.getRay2().HasSubSegment(left.getRay1()) && right.getRay1().HasSubSegment(left.getRay2())) return -1; 
+		
+//		
+//		if (right.getRay1().HasSubSegment(left.getRay2()) || right.getRay1().HasSubSegment(left.getRay1())
+//				&& right.getRay2().HasSubSegment(left.getRay1()) || right.getRay2().HasSubSegment(left.getRay2()))
+//			return -1;
+		
+		return 0; 
 		
 	}
 }
