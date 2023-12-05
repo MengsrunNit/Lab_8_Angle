@@ -42,11 +42,11 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 			return true;
 		}
 		else if (belongs(element)) {
-			if(_comparator.compare(_canonical, element) == -1) {
+			if(_comparator.compare(_canonical, element) == 1) {
 				_rest.addToFront(_canonical);
 				_canonical = element;
 			}
-			else if(_comparator.compare(_canonical, element) ==1 || _comparator.compare(_canonical, element) ==0) {
+			else if(_comparator.compare(_canonical, element) == -1 || _comparator.compare(_canonical, element) ==0) {
 				_rest.addToFront(element);
 			}
 			
@@ -65,13 +65,13 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 		_canonical=element;
 		return false;
 	}
-	@Override 
-	public String toString() {
-		return "" + _canonical.toString() + "|" + _rest.toString();
-	}
+	
 	public boolean belongs(Angle target) {
-		if (_comparator.compare(_canonical, target) == AngleStructureComparator.STRUCTURALLY_INCOMPARABLE) return false;
-		return true;
+		if(target == null) {
+			return false; 
+		}
+		if (_comparator.compare(_canonical, target) == 1 || _comparator.compare(_canonical, target)==-1 || _comparator.compare(_canonical, target)==0) return true;
+		return false;
 		
 	}
 	

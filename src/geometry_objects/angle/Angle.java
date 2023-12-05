@@ -172,17 +172,20 @@ public class Angle implements Comparable<Angle>
 				            " = " + String.format("%1$.3f", _measure) + ")";
 	}
 
+	
 	@Override
-	public boolean equals(Object obj)
-	{
-		//IS IT AN ANGLE?
-		if (obj == null || !(obj instanceof Angle)) return false; 
-        Angle that = (Angle) obj;
-        
-        //Good job - is angle. Is the vertex the same? If so, its segments can be flip-flopped but they need to be the same
-		if (!this._vertex.equals(that._vertex))return false;
-		if (!(this._ray1.equals(that._ray1) || this._ray1.equals(that._ray2))) return false;
-		return (!(this._ray2.equals(that._ray1) || this._ray2.equals(that._ray2)));
-		
+	public boolean equals(Object obj) {
+	    if (this == obj) return true;
+	    if (obj == null || getClass() != obj.getClass()) return false;
+	    
+	    Angle that = (Angle) obj;
+	    
+	    // Check if vertices are equal
+	    if (!_vertex.equals(that._vertex)) return false;
+	    
+	    // Check if rays are equal disregarding order
+	    return ((_ray1.equals(that._ray1) && _ray2.equals(that._ray2)) ||
+	            (_ray1.equals(that._ray2) && _ray2.equals(that._ray1)));
 	}
+
 }

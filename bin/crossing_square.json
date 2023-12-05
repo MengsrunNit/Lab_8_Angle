@@ -1,0 +1,43 @@
+//
+//	  B-------C
+//    |	 \ /  | 
+// 	  |	  X   |
+//    |  / \  |
+//	  A-------D
+//
+{
+  "Figure" :
+  {
+    "Description" : "A rectangle with a central crossing patten from corner to corner.",
+    "Points" :
+	  [
+	    {
+	      "name" : "A",
+		  "x" : 1,
+   	      "y" : 1
+		},
+	    {
+	      "name" : "B",
+		  "x" : 1,
+   	      "y" : 7
+		},
+	    {
+	      "name" : "C",
+		  "x" : 7,
+   	      "y" : 7
+		},
+        {
+          "name" : "D",
+          "x" : 7,
+          "y" : 1
+        }
+	  ],
+    "Segments" :
+      [
+	    {"A" : ["B", "C"] },
+        {"B" : ["D"] },
+        {"C" : ["B", "D"] },
+        {"D" : ["A"] }
+      ]
+  }
+}

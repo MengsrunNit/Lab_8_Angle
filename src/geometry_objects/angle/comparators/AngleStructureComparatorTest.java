@@ -65,7 +65,7 @@ class AngleStructureComparatorTest extends AngleStructureComparator{
 			System.out.print("LeftAngle1");
 		} 
 		assertEquals(compare(angleLeft1, angleRight1), 1);
-		//assertEquals(compare(angleRight1, angleLeft1), -1);
+		assertEquals(compare(angleRight1, angleLeft1), -1);
 		
 	}
 	@Test
