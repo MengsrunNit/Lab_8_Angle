@@ -1,5 +1,8 @@
 package geometry_objects.angle;
 
+import java.util.Comparator;
+import utilities.LinkedList;
+
 import geometry_objects.angle.comparators.AngleStructureComparator;
 import utilities.LinkedEquivalenceClass;
 
@@ -27,6 +30,10 @@ import utilities.LinkedEquivalenceClass;
 public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 {
     // TODO
+	protected Angle _canonical;
+	protected Comparator<Angle> _comparator;
+	protected LinkedList<Angle> _body;
+	
 	public AngleLinkedEquivalenceClass(AngleStructureComparator comparator) {
 		super(comparator); 
 	}
@@ -60,7 +67,15 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	// TODO
 	@Override 
 	public boolean add(Angle element) {
-	
+		if (isEmpty() || _canonical == null) {
+			this._canonical = element;
+			return true;
+		}
+		else if (belongs(element)) {
+			_body.addToFront(element);
+			return true;
+		}
+		return false;
 	}
 	@Override 
 	public boolean remove(Angle target) {
@@ -73,7 +88,7 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 		return true;
 	}
 	@Override 
-	public boolean demoteAndSetCanonical(T element) {
+	public boolean demoteAndSetCanonical(Angle element) {
 		if(belongs(element)) {
 			_canonical=element;
 			return true;
