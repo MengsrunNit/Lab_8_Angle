@@ -1,7 +1,8 @@
 package geometry_objects.angle;
 
 import geometry_objects.angle.comparators.AngleStructureComparator;
-import utilities.eq_classes.LinkedEquivalenceClass;
+import utilities.LinkedEquivalenceClass;
+
 
 /**
  * This implementation requires greater knowledge of the implementing Comparator.
@@ -26,4 +27,66 @@ import utilities.eq_classes.LinkedEquivalenceClass;
 public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 {
     // TODO
+	public AngleLinkedEquivalenceClass(AngleStructureComparator comparator) {
+		super(comparator); 
+	}
+	
+	@Override
+	public Angle canonical(){
+		return _canonical;
+	}
+	
+	@Override
+	public boolean isEmpty(){
+		return (_rest.isEmpty() && _canonical==null);
+	}
+	
+	@Override
+	public void clear() {
+		_canonical=null;
+		_rest.clear();
+	}
+	
+	@Override
+	public void clearNonCanonical() {
+		_rest.clear();
+	}
+	
+	@Override
+		public int size() {
+			return _rest.size();
+		}
+	
+	// TODO
+	@Override 
+	public boolean add(Angle element) {
+	
+	}
+	@Override 
+	public boolean remove(Angle target) {
+		return _rest.remove(target);
+	}
+	
+	@Override 
+	public boolean removeCanonical(){
+		_canonical=null;
+		return true;
+	}
+	@Override 
+	public boolean demoteAndSetCanonical(T element) {
+		if(belongs(element)) {
+			_canonical=element;
+			return true;
+		}
+		_rest.clear();
+		_canonical=element;
+		return false;
+	}
+	@Override 
+	public String toString() {
+		return "" + _canonical.toString() + "|" + _rest.toString();
+	}
+	
+	
+	
 }

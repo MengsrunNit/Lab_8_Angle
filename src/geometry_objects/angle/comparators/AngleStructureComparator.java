@@ -60,6 +60,21 @@ public class AngleStructureComparator implements Comparator<Angle>
 	@Override
 	public int compare(Angle left, Angle right)
 	{
-        // TODO
+        // when the left angle is not equal to the right anlge return Integer.MAX_VALUE;
+		if(left.compareTo(right)==0) {
+			return 0;
+		}
+		//the two angles are equivalence but left ray is bigger than the right ray
+		else if(left.compareTo(right)>0){  
+			return 1;
+		}
+		// the two angles are equivalence but the left ray is smaller than the right ray
+		else if(left.compareTo(right)<0) {
+			return -1;
+		}
+		
+		return STRUCTURALLY_INCOMPARABLE;
+			
+		
 	}
 }

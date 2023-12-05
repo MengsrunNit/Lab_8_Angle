@@ -1,8 +1,9 @@
 package geometry_objects.angle;
 
-import geometry_objects.angle.comparators.AngleStructureComparator;
-import utilities.eq_classes.EquivalenceClasses;
+import java.util.Comparator;
 
+import geometry_objects.angle.comparators.AngleStructureComparator;
+import utilities.EquivalenceClasses;
 /**
  * Given the figure below:
  * 
@@ -22,5 +23,9 @@ import utilities.eq_classes.EquivalenceClasses;
  */
 public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 {
-	// TODO
+
+	
+
+	
+	
 }
