@@ -27,11 +27,11 @@ public class AngleIdentifier
 	private void computeAngles() throws FactException
 	{
 		//Get your two segments
-		for (Segment s1 : _segments.values()) {
+		for(Segment s1 : _segments.values()) {
 			for (Segment s2 : _segments.values()) {
-				//Could this combination be a valid angle? Must share a point, and not be subsegments of each other
+				//Could this combination be a valid angle? Must share a point, and not be overlapping.
 				Point v = s1.sharedVertex(s2);
-				if (v != null && !Segment.overlaysAsRay(s1, s2) && s1.other(v) != s2.other(v)) {
+				if (v != null && !Segment.overlaysAsRay(s1, s2) && !(_angles.contains(new Angle(s1, s2)))) {
 					_angles.add(new Angle(s1, s2));
 				}
 			}

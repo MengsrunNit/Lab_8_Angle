@@ -1,4 +1,4 @@
-package preprocessor;
+package Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
@@ -13,6 +13,8 @@ import geometry_objects.angle.AngleEquivalenceClasses;
 import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
 import input.components.FigureNode;
+import preprocessor.AngleIdentifier;
+import preprocessor.Preprocessor;
 import input.InputFacade;
 class AngleIdentifierTest
 {
@@ -45,7 +47,7 @@ class AngleIdentifierTest
 		init("crossing_symmetric_triangle.json");
 		AngleIdentifier angleIdentifier = new AngleIdentifier(_segments);
 		AngleEquivalenceClasses computedAngles = angleIdentifier.getAngles();
-		System.out.println(computedAngles.toString());
+		
 		// The number of classes should equate to the number of 'minimal' angles
 		assertEquals("Number of Angle Equivalence classes", 25, computedAngles.numClasses());
 		
@@ -261,6 +263,7 @@ class AngleIdentifierTest
 		init("src/rectangular_figure.json");
 		AngleIdentifier angleIdentifier = new AngleIdentifier(_segments);
 		AngleEquivalenceClasses computedAngles = angleIdentifier.getAngles();
+		
 		// The number of classes should equate to the number of 'minimal' angles
 		assertEquals("Number of Angle Equivalence classes", 21, computedAngles.numClasses());
 		
@@ -275,6 +278,7 @@ class AngleIdentifierTest
 		Segment cd = new Segment(_points.getPoint("C"), _points.getPoint("D"));
 		Segment ce = new Segment(_points.getPoint("C"), _points.getPoint("E"));
 		Segment de = new Segment(_points.getPoint("D"), _points.getPoint("E"));
+		Segment df = new Segment(_points.getPoint("D"), _points.getPoint("F"));
 		Segment ef = new Segment(_points.getPoint("E"), _points.getPoint("F"));
 		//
 		// Angles we expect to find
@@ -299,6 +303,7 @@ class AngleIdentifierTest
 			expectedAngles.add(new Angle(bc, cd));
 			
 			expectedAngles.add(new Angle(bc, be));
+			
 			expectedAngles.add(new Angle(ab, be));
 			
 			expectedAngles.add(new Angle(ab, af));
@@ -308,22 +313,29 @@ class AngleIdentifierTest
 			expectedAngles.add(new Angle(ef, be));
 			
 			expectedAngles.add(new Angle(de, be));
+			
+			expectedAngles.add(new Angle(ac, af));
+			
+			expectedAngles.add(new Angle(ac, cd));
+			
+			expectedAngles.add(new Angle(df, cd));
+			
+			expectedAngles.add(new Angle(df, af));
 			//
 			//
 			
-			
+			expectedAngles.add(new Angle(ac, ae));
+			expectedAngles.add(new Angle(ac, ce));
 			expectedAngles.add(new Angle(ae, be));
 			expectedAngles.add(new Angle(ae, ce));
 			expectedAngles.add(new Angle(ae, de));
 			expectedAngles.add(new Angle(ae, ef));
 			expectedAngles.add(new Angle(ab, ae));
 			expectedAngles.add(new Angle(bc, ce));
-			
 			expectedAngles.add(new Angle(be, ce));
 			expectedAngles.add(new Angle(ce, de));
 			expectedAngles.add(new Angle(ce, ef));
 			expectedAngles.add(new Angle(cd, ce));
-			
 			expectedAngles.add(new Angle(ae, af));
 			
 		}
@@ -339,8 +351,3 @@ class AngleIdentifierTest
 		}
 	}
 }
-
-
-
-
-

@@ -129,10 +129,13 @@ class AngleEquivalenceClassesTest {
 		}
 		
 		
+		// initialize the comapator
 		AngleStructureComparator comparator = new AngleStructureComparator();
 		
+		// initialize the AngleEquivalence class
 		AngleEquivalenceClasses AEC = new AngleEquivalenceClasses(comparator);
 		
+		// adding all possible angle from the figure above 
 		AEC.add(BAD);
 		AEC.add(BAC);
 		AEC.add(EAC);
@@ -148,8 +151,10 @@ class AngleEquivalenceClassesTest {
 		AEC.add(EAG);
 		AEC.add(EAF); 
 		
+		// tsting how many class are there
 		assertEquals(AEC.numClasses(),3);
 		
+		// testing whhether it contain all Angle in the linkedList
 		assertTrue(AEC.contains(BAD));
 		assertTrue(AEC.contains(BAC));
 		assertTrue(AEC.contains(EAD));
@@ -161,6 +166,10 @@ class AngleEquivalenceClassesTest {
 		assertTrue(AEC.contains(BAG));
 		assertTrue(AEC.contains(BAF));
 		assertTrue(AEC.contains(EAF));
+		
+		assertEquals(AEC.size(),9);
+		
+	
 		
 		
 		

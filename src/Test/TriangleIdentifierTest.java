@@ -1,4 +1,4 @@
-package preprocessor;
+package Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +12,8 @@ import geometry_objects.Triangle;
 import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
 import input.components.FigureNode;
+import preprocessor.Preprocessor;
+import preprocessor.TriangleIdentifier;
 import input.InputFacade;
 class TriangleIdentifierTest
 {

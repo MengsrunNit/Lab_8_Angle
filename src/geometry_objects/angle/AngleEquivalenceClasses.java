@@ -32,15 +32,8 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 		super(comparator);
 	}
 	
-	/**
-	 * add() method for EquivalenceClasses
-	 * @param element contains the element to add
-	 * @return true if the element is added successfully
-	 * Override ensures that the Equivalence Class implementation 
-	 * is replaced with the proper type (Angle)
-	 */
 	@Override 
-	public boolean add(Angle element) {	
+	public boolean add(Angle element) {	 
 		// get the index of the class for the given element, 
 		// immediately add it if the equivalence class already exists 
 		int index = indexOfClass(element);
