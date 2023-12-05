@@ -1,7 +1,8 @@
 package preprocessor;
 import java.util.Map;
 import exceptions.FactException;
-import geometry_objects.Segment;
+import geometry_objects.points.*;
+import geometry_objects.*;
 import geometry_objects.angle.Angle;
 import geometry_objects.angle.AngleEquivalenceClasses;
 import geometry_objects.angle.comparators.AngleStructureComparator;
@@ -29,7 +30,8 @@ public class AngleIdentifier
 		for (Segment s1 : _segments.values()) {
 			for (Segment s2 : _segments.values()) {
 				//Could this combination be a valid angle? Must share a point, and not be subsegments of each other
-				if((s2.has(s1.getPoint1()) || s2.has(s1.getPoint2())) && !(s2.HasSubSegment(s1) || s1.HasSubSegment(s2))) {
+				Point v = s1.sharedVertex(s2);
+				if (v != null && !Segment.overlaysAsRay(s1, s2) && s1.other(v) != s2.other(v)) {
 					_angles.add(new Angle(s1, s2));
 				}
 			}

@@ -1,4 +1,4 @@
-package geometry_objects.angle.comparators;
+package Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Map;
 import java.util.Set;
 import geometry_objects.angle.*;
+import geometry_objects.angle.comparators.AngleStructureComparator;
 
 import org.junit.jupiter.api.Test;
 

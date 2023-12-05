@@ -1,4 +1,4 @@
-package geometry_objects.angle;
+package Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,6 +29,9 @@ class AngleEquivalenceClassesTest {
 		Segment AF = new Segment(A, F);
 		Segment AG = new Segment(A, G); 
 		
+		//
+		// FIRST BIG UPPER ANGLE
+		//
 		Angle BAD = null;
 		try {
 			BAD = new Angle(AB, AD);
@@ -57,12 +60,14 @@ class AngleEquivalenceClassesTest {
 			System.out.println("Angle BAD");
 		}
 		
-		// Second test 
+		//
+		// Second SMALLER ANGLE delcaration
+		//
 		Angle DAF = null;
 		try {
 			DAF = new Angle(AD, AF);
 		} catch (FactException e) {
-			System.out.println("Angle BAD");
+			System.out.println("Angle DAF");
 		}
 		
 		
@@ -70,7 +75,7 @@ class AngleEquivalenceClassesTest {
 		try {
 			DAG = new Angle(AD, AG);
 		} catch (FactException e) {
-			System.out.println("Angle BAD");
+			System.out.println("Angle DAG");
 		}
 		
 		
@@ -78,7 +83,7 @@ class AngleEquivalenceClassesTest {
 		try {
 			CAF = new Angle(AC, AF);
 		} catch (FactException e) {
-			System.out.println("Angle BAD");
+			System.out.println("Angle CAF");
 		}
 		
 		
@@ -86,13 +91,77 @@ class AngleEquivalenceClassesTest {
 		try {
 			CAG = new Angle(AC, AG);
 		} catch (FactException e) {
-			System.out.println("Angle BAD");
+			System.out.println("Angle CAG");
+		}
+		
+		//
+		//The right angle part of the traingle 
+		//
+		Angle BAF = null;
+		try {
+			BAF = new Angle(AB, AF);
+		} catch (FactException e) {
+			System.out.println("Angle DAF");
+		}
+		
+		
+		Angle BAG = null;
+		try {
+			BAG = new Angle(AB, AG);
+		} catch (FactException e) {
+			System.out.println("Angle DAG");
+		}
+		
+		
+		Angle EAF = null;
+		try {
+			EAF = new Angle(AE, AF);
+		} catch (FactException e) {
+			System.out.println("Angle CAF");
+		}
+		
+		
+		Angle EAG = null;
+		try {
+			EAG = new Angle(AE, AG);
+		} catch (FactException e) {
+			System.out.println("Angle CAG");
 		}
 		
 		
 		AngleStructureComparator comparator = new AngleStructureComparator();
 		
 		AngleEquivalenceClasses AEC = new AngleEquivalenceClasses(comparator);
+		
+		AEC.add(BAD);
+		AEC.add(BAC);
+		AEC.add(EAC);
+		AEC.add(EAD);
+		
+		AEC.add(DAG);
+		AEC.add(DAF);
+		AEC.add(CAG);
+		AEC.add(CAF);
+		
+		AEC.add(BAG);
+		AEC.add(BAF); 
+		AEC.add(EAG);
+		AEC.add(EAF); 
+		
+		assertEquals(AEC.numClasses(),3);
+		
+		assertTrue(AEC.contains(BAD));
+		assertTrue(AEC.contains(BAC));
+		assertTrue(AEC.contains(EAD));
+		
+		assertTrue(AEC.contains(DAG));
+		assertTrue(AEC.contains(DAF));
+		assertTrue(AEC.contains(CAF));
+		
+		assertTrue(AEC.contains(BAG));
+		assertTrue(AEC.contains(BAF));
+		assertTrue(AEC.contains(EAF));
+		
 		
 		
 	}
